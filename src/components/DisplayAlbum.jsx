@@ -26,8 +26,11 @@ const DisplayAlbum = () => {
         </div>
       </div>
       <div className="flex items-center  mt-[70px] gap-1 w-[100%] p-4 rounded-lg ">
-        <div className="flex items-center justify-center w-[50px] h-[50px] bg-[#1db954] rounded-full transition-transform duration-300 hover:scale-110 ">
+        <div 
+         onClick={() => playWithId(0)} // Toca ou pausa a música
+         key={0} className="flex items-center justify-center w-[50px] h-[50px] bg-[#1db954] rounded-full transition-transform duration-300 hover:scale-110 ">
           <img
+          
             className="w-[40%] cursor-pointer"
             src={assets.play_black_icon}
             alt=""

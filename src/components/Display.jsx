@@ -19,9 +19,7 @@ const Display = () => {
   const bgColorAlbum = albumsData[Number(albumId)].bgColor;
   const bgColorArtist = artistData[Number(artistId)].bgColor;
 
-  console.log(artistId)
 
-    console.log(bgColorArtist );
   useEffect(()=> {
     if(isAlbum ){
       displayRef.current.style.background = `linear-gradient(${bgColorAlbum}, #121212 )`
@@ -35,7 +33,7 @@ const Display = () => {
 
   useEffect(() => {
     if (isArtist) {
-        displayRef.current.style.background = `linear-gradient(${bgColorArtist}, #121212 70%), #121212`;
+        displayRef.current.style.background = `linear-gradient(${bgColorArtist}, #121212 50%), #121212`;
     } else {
         displayRef.current.style.background = `#121212`;
     }

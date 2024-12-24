@@ -5,7 +5,6 @@ import loop_icon from './loop.png'
 import mic_icon from './mic.png'
 import next_icon from './next.png'
 import play_icon from './play.png'
-
 import pause_icon from './pause.png'
 import plays_icon from './plays.png'
 import prev_icon from './prev.png'
@@ -26,6 +25,7 @@ import arrow_right from './right_arrow.png'
 import arrow_left from './left_arrow.png'
 import spotify_logo from './spotify_logo.png'
 import clock_icon from './clock_icon.png'
+import notification_bell_icon from './notification_bell.png'
 import img1 from './img1.jpg'
 import img2 from './img2.jpg'
 import img3 from './img3.jpg'
@@ -43,6 +43,9 @@ import img14 from './img14.jpg'
 import img15 from './img15.jpg'
 import img16 from './img16.jpg'
 import img17 from './img17.jpeg'
+import img18 from './img18.jpg'
+import img19 from './img19.jpg'
+import img20 from './img20.jpg'
 import song1 from  './song1.mp3'
 import song2 from  './song2.mp3'
 import song3 from  './song3.mp3'
@@ -86,6 +89,7 @@ export const assets = {
     ham_menu_icon,
     liked_songs_icon,
     verified_artist_icon,
+    notification_bell_icon,
     img1,
     img2,
     img3,
@@ -249,7 +253,7 @@ export const artistData = [
         image: img17,
         bgColor: "#636363",
         desc:"Put a smile on your face with these happy tunes",
-      
+        banner: img20
 
     },
     {
@@ -258,22 +262,24 @@ export const artistData = [
         image: img11,
         bgColor: "#636363",
         desc:"Put a smile on your face with these happy tunes",
+        banner: img19
 
     },
     {
         id:2,
         name: "Guns N Roses",
         image: img1,
-        bgColor: "#d9af4b",
+        bgColor: "#cc1f29",
         desc:"Put a smile on your face with these happy tunes",
-   
+        banner: img1
     },
     {
         id:3,
         name: "AURORA",
         image: img5,
-        bgColor:" #ac5b6b",
+        bgColor:" #4f71a4",
         desc:"Put a smile on your face with these happy tunes",
+        banner: img18
       
     },
     {
@@ -282,7 +288,7 @@ export const artistData = [
         image: img14,
         bgColor: "#eaba4b",
         desc:"Put a smile on your face with these happy tunes",
-       
+        banner: img14
     },
     {
         id:5,
@@ -290,7 +296,7 @@ export const artistData = [
         image: img15,
         bgColor: "#eaba4b",
         desc:"Put a smile on your face with these happy tunes",
-      
+        banner: img15
     },
     {
         id:6,
@@ -298,7 +304,7 @@ export const artistData = [
         image: img7,
         bgColor: "#eaba4b",
         desc:"Put a smile on your face with these happy tunes",
-       
+        banner: img7
     },
     {
         id:7,
@@ -306,7 +312,7 @@ export const artistData = [
         image: img12,
         bgColor: "#eaba4b",
         desc:"Put a smile on your face with these happy tunes",
-        
+        banner: img12
     },
         
 ]

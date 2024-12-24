@@ -20,6 +20,21 @@ export default {
     },
     plugins: [],
  
+
+    theme: {
+      extend: {
+        keyframes: {
+          move: {
+            '0%': { transform: 'translateY(0)' },
+            '100%': { transform: 'translateY(-50px)' } 
+          }
+        },
+        animation: {
+          move: 'move 1s ease-in-out' 
+        }
+      }
+    }
+      
 }
 
 

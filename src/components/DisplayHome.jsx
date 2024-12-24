@@ -4,8 +4,10 @@ import { albumsData, artistData, assets, songsData } from '../assets/assets';
 import AlbumItem from './AlbumItem';
 import SongItem from './SongItem';
 import ArtistItem from './ArtistItem';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const DisplayHome = () => {
+  const navigate = useNavigate();
   // Definindo refs para os carrosséis
   const albumsCarouselRef = useRef(null); // Ref para o carrossel de álbuns
   const songsCarouselRef = useRef(null);  // Ref para o carrossel de músicas
@@ -64,7 +66,7 @@ const DisplayHome = () => {
           
           <div className="grid grid-cols-2 xs:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 ml-2">
             {albumsData.map((item, index) => (
-              <a href={`/album/${item.id}`} key={item.id}>
+              <a    onClick={() => navigate(`/album/${item.id}`)}>
               <div key={index} className="bg-[#242424] bg-opacity-45 backdrop-blur-lg text-white hover:bg-[#424141] hover:bg-opacity-30 pl-5 p-2 rounded-md flex flex-row gap-4 items-center group relative">
                 {/* Imagem da capa, com largura e altura fixas */}
                 <img className="w-12 h-12 object-cover -ml-[9%] -my-[3%]" src={item.image} alt={`Capa do álbum ${item.name}`} />

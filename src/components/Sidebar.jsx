@@ -12,13 +12,13 @@ const Sidebar = () => {
             <div className='bg-[#121212] h-[15%] rounded flex flex-col justify-around'>
                 <div onClick={() => navigate('/')} className='flex items-center gap-3 pl-8 cursor-pointer'>
                     <img className='w-6' src={assets.home_icon} alt="" />
-                    <p className='font-bold'>Home</p>
+                    <p className='font-semibold'>Home</p>
                 </div>
 
 
                 <div className='flex items-center gap-3 pl-8 cursor-pointer'>
                     <img className='w-6' src={assets.search_icon} alt="" />
-                    <p className='font-bold'>Search</p>
+                    <p className='font-semibold'>Search</p>
                 </div>
 
             </div>
@@ -84,7 +84,7 @@ const Sidebar = () => {
 
                         }}
                     >
-                        <img className='   w-8 bg-[#242424] p-2 rounded-2xl cursor-pointer' src={assets.arrow_right} alt="" />
+                        <img className=' w-8 bg-[#242424] p-2 rounded-2xl cursor-pointer' src={assets.arrow_right} alt="" />
                     </button>
                 </div>
 
@@ -93,9 +93,9 @@ const Sidebar = () => {
                         <img className='w-4 ' src={assets.search_icon} alt="" />
                     </div>
 
-                    <div className='m-2 mb-4 flex items-center'>
-                        <p className='whitespace-nowrap text-[#73777a] hover:text-white font-light '>Recents</p>
-                        <img className='w-4 ml-2 mt-1' src={assets.ham_menu_icon} alt="" />
+                    <div className='m-2 mb-4 flex items-center group cursor-pointer '>
+                        <p className='whitespace-nowrap text-[#73777a]   transform-scale-90 transition-all duration-300 ease-in-out group-hover:text-white	 group-hover:text-lg'>Recents</p>
+                        <img className='w-3 ml-1 mt-1  transform-scale-90 transition-all duration-300 ease-in-out group-hover:brightness-200 group-hover:scale-125	 ' src={assets.ham_menu_icon} alt="" />
 
                     </div>
                 </div>

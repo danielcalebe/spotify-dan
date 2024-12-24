@@ -5,24 +5,26 @@ import Display from "./components/Display";
 import { PlayerContext } from "./context/PlayerContext";
 
 const App = () => {
+  // Função para atualizar o volume
 
   const { audioRef, track } = useContext(PlayerContext)
 
-  return (    
+  return (
 
     <div className="h-screen bg-black ">
       <div className="h-[90%] flex overflow-x-hidden">
-        <Sidebar />
+       
+          <Sidebar />
         
-        
+
           <Display />
-        
+         
       </div>
       <Player />
       <audio ref={audioRef} src={track.file} preload="auto"></audio>
     </div>
   )
-  
+
 }
 
 export default App

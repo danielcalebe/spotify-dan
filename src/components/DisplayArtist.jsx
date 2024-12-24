@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { albumsData, artistData as allArtistData, artistData, assets } from '../assets/assets'; 
+import { albumsData, artistData as allArtistData, artistData, assets } from '../assets/assets';
 import { songsData } from '../assets/assets';
 import AlbumItem from './AlbumItem';
 import ArtistItem from './ArtistItem';
 import Navbar from './Navbar';
+import { useInView } from 'react-intersection-observer';
 
 const DisplayArtist = () => {
     const { id } = useParams(); // Obtém o 'id' da URL
@@ -53,21 +54,7 @@ const DisplayArtist = () => {
             }
         };
     }, []);
-
-    // Função para calcular o efeito parallax no fundo
-    const backgroundPosition = `center ${scrollPosition * 0.4}px`; // A imagem de fundo se move mais devagar (0.4)
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrollPosition(window.scrollY); // Atualiza a posição da rolagem
-        };
-
-        window.addEventListener('scroll', handleScroll); // Adiciona o evento de scroll
-        return () => {
-            window.removeEventListener('scroll', handleScroll); // Limpa o evento ao desmontar o componente
-        };
-    }, []);
-
+ 
     useEffect(() => {
         if (mainContentRef.current) {
             mainContentRef.current.scrollIntoView({
@@ -76,27 +63,40 @@ const DisplayArtist = () => {
             });
         }
     }, [id]); // Só executa quando o 'id' do artista mudar
-   
+
+
+
+
+
+
+    
+
+
     return (
         <>
-            <Navbar />
-            <div className="w-full mt-6 bg-center" ref={mainContentRef}>
-                <div
-                    className="w-full h-[400px] bg-white relative rounded-3xl"
-                    style={{
-                        backgroundImage: `url(${artist.image})`,
-                        backgroundPosition: 'center', // Centraliza a imagem
-                        backgroundAttachment: 'fixed', // Efeito parallax
-                        backgroundSize: 'auto', // Garante que a imagem fique visível inteira, sem cortar
-                        backgroundRepeat: '', // Garante que a imagem fique visível inteira, sem cortar
 
-                        transition: 'background-position 0.2s ease-out', // Transição suave
-                    }}
-                >
+            <Navbar />
+
+            <div className="-mx-[3%] flex justify-content items-center  bg-center"  ref={mainContentRef}>
+                <div  className="w-full h-[400px] bg-white relative  " style={{
+                    backgroundImage: `url(${artist.banner})`,
+                    backgroundColor: 'rgba(0, 0, 0, 0.3)', // Adiciona a sobreposição de cor
+                    backgroundBlendMode: 'multiply', // Experimente com diferentes valores de blendMode
+                    backgroundPosition: 'center center', // Centraliza a imagem de fundo dentro da div
+                    backgroundAttachment: 'fixed', // Faz a imagem ficar fixa enquanto rola a página
+                    backgroundSize: 'cover', // Faz a imagem cobrir toda a div
+                    backgroundRepeat: 'no-repeat', // Não repete a imagem
+                    transition: 'background-position 0.2s ease-out',
+
+                    backgroundPositionX: 10 ,            
+                   opacity: 0.8, // Aplica a opacidade calculada
+
+                    
+                }}>
                     {/* Texto e ícone do artista verificado */}
                     <div className="absolute top-[56%] left-8 z-10 text-white flex items-center gap-2">
                         <img className="w-8" src={assets.verified_artist_icon} alt="Artista Verificado" />
-                        <p className="-ml-2 text-xs font-bold text-center mt-1">Verified Artist</p>
+                        <p className="-ml-2 text-xs font-bold text-center mt-1 opacity-1">Verified Artist</p>
                     </div>
 
                     {/* Nome do artista */}
@@ -105,6 +105,7 @@ const DisplayArtist = () => {
                         <p className="text-xs font-bold text-left">14,874,998 monthly listeners</p>
                     </div>
                 </div>
+
             </div>
 
             {/* Resto do conteúdo da página, como as seções de álbuns, músicas populares, etc. */}
@@ -164,41 +165,41 @@ const DisplayArtist = () => {
                 <div className="mb-4">
                     <div ref={albumsCarouselRef} className="flex overflow-x-auto scrollbar-hide space-x-4 p-2 scroll-smooth">
                         {albumsData.map((item, index) => (
-                            
+
                             <AlbumItem id={item.id} key={index} name={item.name} desc={item.desc} image={item.image} />
                         ))}
                     </div>
                 </div>
 
                 <div>
-        <div className="flex flex-row my-5 text-center items-center justify-between text-xs ml-2 mb-6">
-            <h1 className="my-5 font-bold text-2xl ml-2 mb-2 hover:underline underline-offset-1 cursor-pointer">
-                Whit {artist.name}
-            </h1>
-            <p className="text-[#6b6a6a] hover:text-white">Show all</p>
-        </div>
+                    <div className="flex flex-row my-5 text-center items-center justify-between text-xs ml-2 mb-6">
+                        <h1 className="my-5 font-bold text-2xl ml-2 mb-2 hover:underline underline-offset-1 cursor-pointer">
+                            Whit {artist.name}
+                        </h1>
+                        <p className="text-[#6b6a6a] hover:text-white">Show all</p>
+                    </div>
 
-        {/* Carrossel de álbuns */}
-        <div className="mb-4">
-            <div ref={albumsCarouselRef} className="flex overflow-x-auto scrollbar-hide space-x-4 p-2 scroll-smooth">
-                {albumsData.reverse().map((item, index) => (
-                    <AlbumItem id={item.id} key={index} name={item.name} desc={item.desc}  image={item.image} />
-                ))}
-            </div>
-        </div>
-    </div>
+                    {/* Carrossel de álbuns */}
+                    <div className="mb-4">
+                        <div ref={albumsCarouselRef} className="flex overflow-x-auto scrollbar-hide space-x-4 p-2 scroll-smooth">
+                            {albumsData.reverse().map((item, index) => (
+                                <AlbumItem id={item.id} key={index} name={item.name} desc={item.desc} image={item.image} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
 
                 {/* Carrossel de outros artistas */}
                 <div className="mb-8" >
                     <h2 className="my-5 font-bold text-xl ml-2">Related Artists</h2>
                     <div ref={artistsCarouselRef} className="flex overflow-x-auto scrollbar-hide space-x-4 p-2">
-                    
+
                         {artistData.map((item, index) => (
                             <ArtistItem id={item.id} key={index} name={item.name} image={item.image} />
                         ))}
                     </div>
                 </div>
-              
+
             </div>
         </>
     );
