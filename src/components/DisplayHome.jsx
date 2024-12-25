@@ -5,8 +5,16 @@ import AlbumItem from './AlbumItem';
 import SongItem from './SongItem';
 import ArtistItem from './ArtistItem';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { handleTabClick } from '../tabUtils';
+import SidebarRight from './SidebarRight';
 
 const DisplayHome = () => {
+
+    useEffect(() => {
+          handleTabClick("bg-white text-black", "bg-black text-white", ".tab-home");
+          
+        }, []);
+        
   const navigate = useNavigate();
   // Definindo refs para os carrosséis
   const albumsCarouselRef = useRef(null); // Ref para o carrossel de álbuns
@@ -53,12 +61,12 @@ const DisplayHome = () => {
     <>
    
       <div className=' -p-10 -m-12 bg-gradient-to-b from-[#ff012023] to-black via-black '>
+        
         <div className='m-13 p-10 '>
-          <Navbar />
           <div className='flex items-center gap-2 mt-4 '> 
-                <p className='bg-white text-black px-4 py-1 rounded-2xl cursor-pointer'>All</p>
-                <p className='bg-black px-4 py-1 rounded-2xl cursor-pointer'>Music</p>
-                <p className='bg-black px-4 py-1 rounded-2xl cursor-pointer'>Podcasts</p>
+                <p className='tab-home bg-white text-black px-4 py-1 rounded-2xl cursor-pointer'>All</p>
+                <p className='tab-home  bg-black px-4 py-1 rounded-2xl cursor-pointer'>Music</p>
+                <p className='tab-home bg-black px-4 py-1 rounded-2xl cursor-pointer'>Podcasts</p>
 
             </div>
 
@@ -120,9 +128,12 @@ const DisplayHome = () => {
                 {artistData.map((item, index) => (
                   <ArtistItem key={index} name={item.name} desc={item.desc} id={item.id} image={item.image} />
                 ))}
+
+
               </div>
           </div>
         </div>
+       
       </div>
     </>
   );

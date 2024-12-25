@@ -2,8 +2,13 @@ import React, { useContext, useState, useEffect } from 'react';
 import { songsData } from '../assets/assets';
 import { assets } from '../assets/assets';
 import { PlayerContext } from '../context/PlayerContext';
+import { useSidebar } from '../context/SidebarContext';
+import { useNavigate } from 'react-router-dom';
+
 
 const Player = () => {
+    const { toggleSidebar } = useSidebar();
+
     const { audioRef, seekBar, seekBg, playStatus, play, pause, track, time, previous, next, seekSong } = useContext(PlayerContext);
 
     const [volume, setVolume] = useState(0.9);
@@ -23,13 +28,14 @@ const Player = () => {
         }
     }, [volume, audioRef]); // Atualiza o volume do áudio quando o estado `volume` mudar
 
+    const navigate = useNavigate();
     return (
-        <div className='h-[10%] bg-black flex justify-between items-center text-white px-4'>
+        <div className='   w-[100%]  h-[10%] bg-black flex justify-between items-center text-white px-4 bottom-0 fixed'>
             <div className='hidden lg:flex items-center gap-4'>
                 <img className='w-12' src={track.image} alt="" />
                 <div>
                     <p>{track.name}</p>
-                    <p>{track.desc.slice(0, 12)}</p>
+                    <p className='hover:underline cursor-pointer'   >{track.author.slice(0, 12)}</p>
                 </div>
             </div>
 
@@ -66,7 +72,7 @@ const Player = () => {
 
             <div className='hidden lg:flex items-center gap-2 opacity-75'>
                 <img className='w-4' src={assets.plays_icon} alt="" />
-                <img className='w-4' src={assets.mic_icon} alt="" />
+                <img className='w-4' src={assets.mic_icon} alt="" onClick={toggleSidebar}/>
                 <img className='w-4' src={assets.queue_icon} alt="" />
                 <img className='w-4' src={assets.speaker_icon} alt="" />
                 <img className='w-4' src={assets.volume_icon} alt="" />

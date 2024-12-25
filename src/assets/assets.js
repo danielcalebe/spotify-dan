@@ -24,6 +24,9 @@ import volume_icon from './volume.png'
 import arrow_right from './right_arrow.png'
 import arrow_left from './left_arrow.png'
 import spotify_logo from './spotify_logo.png'
+import spotify_logo_white from './logo_white.png'
+import browse_icon from './browse.png'
+
 import clock_icon from './clock_icon.png'
 import notification_bell_icon from './notification_bell.png'
 import img1 from './img1.jpg'
@@ -90,6 +93,7 @@ export const assets = {
     liked_songs_icon,
     verified_artist_icon,
     notification_bell_icon,
+    browse_icon,
     img1,
     img2,
     img3,
@@ -106,6 +110,7 @@ export const assets = {
     img14,
     img15,
     img16,
+    spotify_logo_white
 }
 
 export const albumsData = [

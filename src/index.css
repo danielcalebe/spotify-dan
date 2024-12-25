@@ -27,3 +27,28 @@
   object-fit: cover;
   animation: move infinite alternate;
 }
+/* Ocultar a barra de rolagem */
+.scrollbar-hidden::-webkit-scrollbar {
+  width: 10px;}
+
+.scrollbar-hidden {
+  scrollbar-width: thin; /* Largura da barra */
+  scrollbar-color: #888 transparent; /* Cor da área deslizante e fundo */
+
+}
+
+.scale-hover {
+  transition: transform 300ms ease-in-out; 
+  transform: scale(1); /* Inicialmente, sem escala */
+}
+.scale-hover:hover  {
+
+  transform: scale(1.1); /* Inicialmente, sem escala */
+}
+.brightness-hover{
+  filter: brightness(1);
+}
+
+.brightness-hover:hover{
+  filter: brightness(1.75);
+}

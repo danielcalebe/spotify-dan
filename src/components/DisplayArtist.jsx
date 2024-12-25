@@ -1,13 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { albumsData, artistData as allArtistData, artistData, assets } from '../assets/assets';
 import { songsData } from '../assets/assets';
 import AlbumItem from './AlbumItem';
 import ArtistItem from './ArtistItem';
-import Navbar from './Navbar';
 import { useInView } from 'react-intersection-observer';
+import { handleTabClick } from "../tabUtils";
+import { PlayerContext } from '../context/PlayerContext';
 
 const DisplayArtist = () => {
+    const { playWithId, track, playStatus } = useContext(PlayerContext);
+
+
+
     const { id } = useParams(); // Obtém o 'id' da URL
     const artist = allArtistData[id]; // Acessa o item correspondente usando o 'id'
 
@@ -54,7 +59,7 @@ const DisplayArtist = () => {
             }
         };
     }, []);
- 
+
     useEffect(() => {
         if (mainContentRef.current) {
             mainContentRef.current.scrollIntoView({
@@ -67,20 +72,20 @@ const DisplayArtist = () => {
 
 
 
-
-
-    
+    useEffect(() => {
+        handleTabClick("bg-white text-black", "bg-[#242424] text-white", ".tab");
+    }, []);
 
 
     return (
         <>
 
-            <Navbar />
 
-            <div className="-mx-[3%] flex justify-content items-center  bg-center"  ref={mainContentRef}>
-                <div  className="w-full h-[400px] bg-white relative  " style={{
+
+            <div className="-mx-[3%] flex justify-content items-center  bg-center" ref={mainContentRef}>
+                <div className="w-full h-[400px] bg-white relative  " style={{
                     backgroundImage: `url(${artist.banner})`,
-                    backgroundColor: 'rgba(0, 0, 0, 0.3)', // Adiciona a sobreposição de cor
+                    backgroundColor: 'rgba(0, 0, 0, 0.6)', // Adiciona a sobreposição de cor
                     backgroundBlendMode: 'multiply', // Experimente com diferentes valores de blendMode
                     backgroundPosition: 'center center', // Centraliza a imagem de fundo dentro da div
                     backgroundAttachment: 'fixed', // Faz a imagem ficar fixa enquanto rola a página
@@ -88,10 +93,9 @@ const DisplayArtist = () => {
                     backgroundRepeat: 'no-repeat', // Não repete a imagem
                     transition: 'background-position 0.2s ease-out',
 
-                    backgroundPositionX: 10 ,            
-                   opacity: 0.8, // Aplica a opacidade calculada
+                    backgroundPositionX: 10,
 
-                    
+
                 }}>
                     {/* Texto e ícone do artista verificado */}
                     <div className="absolute top-[56%] left-8 z-10 text-white flex items-center gap-2">
@@ -111,40 +115,51 @@ const DisplayArtist = () => {
             {/* Resto do conteúdo da página, como as seções de álbuns, músicas populares, etc. */}
             <div>
                 <h1 className="my-5 font-bold text-2xl ml-2">Popular</h1>
-                {songsData.slice(0, 5).map((item, index) => (
-                    <div key={index} className="group w-full h-12 rounded flex flex-row items-center hover:bg-[#ffffff2b] gap-4">
-                        <div className="flex items-center gap-4 w-full">
-                            <div className="ml-4 relative w-[20px] h-[20px]">
-                                <img
-                                    className="group-hover:block hidden w-[15px] h-[15px] absolute top-1 left-0"
-                                    src={assets.play_icon}
-                                    alt=""
-                                />
-                                <p className="group-hover:hidden text-[#6b6a6a] font-semibold">{index + 1}</p>
-                            </div>
-                            <div className="w-10 ml-2">
-                                <img src={item.image || assets.img14} alt="" />
-                            </div>
-                            <div className="text-center">
-                                <p className="text-white font-semibold">{item.name}</p>
-                            </div>
-                            <div className="flex flex-row gap-7 flex-grow text-[#6b6a6a]">
-                                <div className="text-center flex-grow mt-1">
-                                    <p className="font-semibold group-hover:text-white"></p>
+
+                {songsData.slice(0, 5).map((item, index) => {
+                    const isPlayingCurrentSong = track.id === item.id; // Verifica se a música atual é esta
+                    return (
+
+
+                        <div key={index} onClick={() => playWithId(item.id)} className="group w-full h-12 rounded flex flex-row items-center hover:bg-[#ffffff2b] gap-4">
+                            <div className="flex items-center gap-4 w-full">
+                                <div className="ml-4 relative w-[20px] h-[20px]">
+                                    <img
+                                      onClick={(e) => {
+                                        e.stopPropagation(); // Evita que o clique no botão dispare o onClick do contêiner
+                                        playWithId(item.id); // Toca ou pausa a música com base no id
+                                      }}
+                                        className="group-hover:block hidden w-[15px] h-[15px] absolute top-1 left-0"
+                                        src={ isPlayingCurrentSong ? assets.pause_icon : assets.play_icon}
+                                        
+                                        alt=""
+                                    />
+                                    <p className="group-hover:hidden text-[#6b6a6a] font-semibold">{index + 1}</p>
                                 </div>
-                                <div className="mt-1 cursor-pointer hidden lg:group-hover:block md:hidden sm:hidden">
-                                    <img className="w-8" src={assets.save_library_icon} alt="" />
+                                <div className="w-10 ml-2">
+                                    <img src={item.image || assets.img14} alt="" />
                                 </div>
-                                <div className="text-center mt-1">
-                                    <p className="font-semibold">{item.duration}</p>
+                                <div className="text-center">
+                                    <p className="text-white font-semibold">{item.name}</p>
                                 </div>
-                                <div className="text-center mb-2 mr-2 cursor-pointer">
-                                    <p className="font-bold">. . .</p>
+                                <div className="flex flex-row gap-7 flex-grow text-[#6b6a6a]">
+                                    <div className="text-center flex-grow mt-1">
+                                        <p className="font-semibold group-hover:text-white"></p>
+                                    </div>
+                                    <div className="mt-1 cursor-pointer hidden lg:group-hover:block md:hidden sm:hidden">
+                                        <img className="w-8" src={assets.save_library_icon} alt="" />
+                                    </div>
+                                    <div className="text-center mt-1">
+                                        <p className="font-semibold">{item.duration}</p>
+                                    </div>
+                                    <div className="text-center mb-2 mr-2 cursor-pointer">
+                                        <p className="font-bold">. . .</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    )
+                })}
                 <p className="mt-6 ml-3 cursor-pointer font-bold text-[#6b6a6a] hover:text-white text-xs">Show more</p>
             </div>
             <div className="h-10"></div>
@@ -154,12 +169,15 @@ const DisplayArtist = () => {
                     <h1 className="my-5 font-bold text-2xl ml-2 mb-6 hover:underline underline-offset-1">Discography</h1>
                     <p className="text-[#6b6a6a] hover:text-white">Show all</p>
                 </div>
-                <div className="flex flex-row gap-3 ml-2 mb-2">
-                    <p className="cursor-pointer p-1 px-4 bg-white text-black rounded-full">Popular releases</p>
-                    <p className="cursor-pointer p-1 px-4 bg-[#242424] hover:bg-[#333333] rounded-full">Album</p>
-                    <p className="cursor-pointer p-1 px-4 bg-[#242424] hover:bg-[#333333] rounded-full">Singles and EPs</p>
-                    <p className="cursor-pointer p-1 px-4 bg-[#242424] hover:bg-[#333333] rounded-full">Compiled</p>
+                <div className="flex flex-row gap-3 ml-2 mb-2 items-center" id="tabs">
+                    <p className="tab text-center cursor-pointer p-1 px-[1.5%] bg-white text-black rounded-full">Popular releases</p>
+                    <p className="tab text-center cursor-pointer p-1 px-[1.5%] bg-[#242424] hover:brightness-200 text-white rounded-full">Album</p>
+                    <p className="tab text-center cursor-pointer p-1 px-[1.5%] bg-[#242424] hover:brightness-200 text-white rounded-full">Singles and EPs</p>
+                    <p className="tab text-center cursor-pointer p-1 px-[1.5%] bg-[#242424] hover:brightness-200 text-white rounded-full">Compiled</p>
                 </div>
+
+
+
 
                 {/* Carrossel de álbuns */}
                 <div className="mb-4">

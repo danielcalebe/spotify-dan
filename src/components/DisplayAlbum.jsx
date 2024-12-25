@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import Navbar from './Navbar';
 import { useParams } from 'react-router-dom';
 import { albumsData, songsData } from '../assets/assets';
 import { assets } from '../assets/assets';
@@ -12,7 +11,6 @@ const DisplayAlbum = () => {
 
   return (
     <>
-      <Navbar />
       <div className="mt-10 flex gap-8 flex-col md:flex-row md:items-end  backdrop-blur-full">
         <img className="w-48 rounded" src={albumData.image} alt="" />
         <div className="flex flex-col">
@@ -82,6 +80,8 @@ const DisplayAlbum = () => {
         <img className="m-auto w-4" src={assets.clock_icon} alt="" />
       </div>
       <hr />
+
+
       {songsData.map((item, index) => {
         const isPlayingCurrentSong = track.id === item.id; // Verifica se a música atual é esta
 
@@ -117,6 +117,8 @@ const DisplayAlbum = () => {
           </div>
         );
       })}
+
+
       <div className="mb-[100px]"></div>
     </>
   );
