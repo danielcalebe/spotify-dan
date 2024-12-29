@@ -11,7 +11,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <div className='w-full h-auto hidden justify-between items-center font-semibold 
+      <div className='mb-2  w-full h-auto hidden justify-between items-center font-semibold 
       sm:flex 	 '>
 
         <div className='pl-4 flex items-center gap-2 md:mr-[20%] '>

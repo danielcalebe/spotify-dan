@@ -44,7 +44,10 @@ const DisplayHome = () => {
     }
     if (songsCarousel) {
       songsCarousel.addEventListener('wheel', (e) => handleWheel(e, songsCarouselRef), { passive: false });
+    }if (artistsCarousel) {
+      artistsCarousel.addEventListener('wheel', (e) => handleWheel(e, artistsCarouselRef), { passive: false });
     }
+
 
     // Remove o listener ao desmontar o componente
     return () => {
@@ -54,13 +57,16 @@ const DisplayHome = () => {
       if (songsCarousel) {
         songsCarousel.removeEventListener('wheel', (e) => handleWheel(e, songsCarouselRef));
       }
+      if (artistsCarousel) {
+        artistsCarousel.removeEventListener('wheel', (e) => handleWheel(e, artistsCarouselRef));
+      }
     };
   }, []);
 
   return (
     <>
    
-      <div className=' -p-10 -m-12 bg-gradient-to-b from-[#ff012023] to-black via-black '>
+      <div className=' -p-10 -m-12  pl-4  border-white bg-gradient-to-b from-[#ff012023] to-black via-black '>
         
         <div className='m-13 p-10 '>
           <div className='flex items-center gap-2 mt-4 '> 

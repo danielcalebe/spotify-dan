@@ -26,6 +26,8 @@ import arrow_left from './left_arrow.png'
 import spotify_logo from './spotify_logo.png'
 import spotify_logo_white from './logo_white.png'
 import browse_icon from './browse.png'
+import close_icon from './close.png'
+import device_icon from './device.png'
 
 import clock_icon from './clock_icon.png'
 import notification_bell_icon from './notification_bell.png'
@@ -47,13 +49,24 @@ import img15 from './img15.jpg'
 import img16 from './img16.jpg'
 import img17 from './img17.jpeg'
 import img18 from './img18.jpg'
+import img21 from './img21.jpg'
+import img22 from './img22.jpg'
+import gif1 from './gif1.gif'
+
 import img19 from './img19.jpg'
 import img20 from './img20.jpg'
+import img23 from './img23.jpeg'
+import img24 from './img24.jpg'
+import img25 from './img25.jpg'
+import img26 from './img26.jpg'
+
 import song1 from  './song1.mp3'
 import song2 from  './song2.mp3'
 import song3 from  './song3.mp3'
 import song4 from  './song4.mp3'
 import song5 from  './song5.mp3'
+import song6 from  './song6.mp3'
+import song7 from  './song7.mp3'
 import play_black_icon from './playBlack.png'
 import pause_black_icon from './pauseBlack.png'
 import ham_menu_icon from './ham_menu.png'
@@ -94,6 +107,8 @@ export const assets = {
     verified_artist_icon,
     notification_bell_icon,
     browse_icon,
+    close_icon,
+    device_icon,
     img1,
     img2,
     img3,
@@ -183,7 +198,8 @@ export const songsData = [
         file:song1,
         desc:"Put a smile on your face with these happy tunes",
         duration:"5:02",
-        author: "Guns N Roses"
+        author: "Guns N' Roses",
+        id_artist: 2
 
     },
     {
@@ -193,7 +209,8 @@ export const songsData = [
         file:song2,
         desc:"Put a smile on your face with these happy tunes",
         duration:"5:06",
-        author: "Nirvana"
+        author: "Nirvana",
+        id_artist: 0
     },
     {
         id:2,
@@ -202,7 +219,8 @@ export const songsData = [
         file:song3,
         desc:"Put a smile on your face with these happy tunes",
         duration:"4:02",
-        author: "Nirvana"
+        author: "Nirvana",
+        id_artist: 0
     },
     {
         id:3,
@@ -211,7 +229,8 @@ export const songsData = [
         file:song4,
         desc:"Put a smile on your face with these happy tunes",
         duration:"4:54",
-         author: "Taylor Swift"
+         author: "Taylor Swift",
+         id_artist: 4
     },
     {
         id:4,
@@ -220,23 +239,29 @@ export const songsData = [
         file:song5,
         desc:"Put a smile on your face with these happy tunes",
         duration:"4:19",
-         author: "AURORA"
+         author: "AURORA",
+         id_artist: 3
     },
     {
         id:5,
-        name: "Song Six",
-        image: img14    ,
-        file:song3,
+        name: "Entombed",
+        image: img24   ,
+        file:song6,
         desc:"Put a smile on your face with these happy tunes",
-        duration:"2:45"
+        duration:"2:45",
+        author: "Deftones",
+        id_artist: 1
+
     },
     {
         id:6,
-        name: "Song Seven",
-        image: img7,
-        file:song1,
+        name: "Construção",
+        image: img25,
+        file:song7,
         desc:"Put a smile on your face with these happy tunes",
-        duration:"2:18"
+        duration:"2:18",
+        author: "Chico Buarque",
+        id_artist: 5
     },
     {
         id:7,
@@ -244,7 +269,9 @@ export const songsData = [
         image: img12,
         file:song2,
         desc:"Put a smile on your face with these happy tunes",
-        duration:"2:35"
+        duration:"2:35",
+        author: "Artist",
+        id_artist: 0
     },
         
 ]
@@ -272,11 +299,11 @@ export const artistData = [
     },
     {
         id:2,
-        name: "Guns N Roses",
+        name: "Guns N' Roses",
         image: img1,
         bgColor: "#cc1f29",
         desc:"Put a smile on your face with these happy tunes",
-        banner: img1
+        banner: img23
     },
     {
         id:3,
@@ -289,19 +316,19 @@ export const artistData = [
     },
     {
         id:4,
-        name: "Artist",
-        image: img14,
-        bgColor: "#eaba4b",
+        name: "Taylor Swift",
+        image: img21,
+        bgColor: "#7f7870",
         desc:"Put a smile on your face with these happy tunes",
-        banner: img14
+        banner: img22
     },
     {
         id:5,
-        name: "Artist 2 ",
-        image: img15,
-        bgColor: "#eaba4b",
+        name: "Chico Buarque",
+        image: img26,
+        bgColor: "#3c2c2c",
         desc:"Put a smile on your face with these happy tunes",
-        banner: img15
+        banner: img26
     },
     {
         id:6,
