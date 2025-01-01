@@ -58,7 +58,7 @@ function Sidebar() {
               ? navigate(`/album/${item.id}`)
               : navigate(`/artist/${item.id}`)
           }
-          className="scale2 p-3 group items-center hover:bg-[#242424] rounded font-semibold flex items-start justify-start gap-1 pl-4 cursor-pointer"
+          className="scale2 p-3  group items-center hover:bg-[#242424] rounded font-semibold flex items-start justify-start gap-1 pl-4 cursor-pointer"
         >
           <div className={`relative ${isSidebarCollapsed ? 'w-12 h-12' : 'w-12 h-12'}`}>
             <div

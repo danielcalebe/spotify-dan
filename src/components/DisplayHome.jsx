@@ -59,14 +59,14 @@ const DisplayHome = () => {
       }
       if (artistsCarousel) {
         artistsCarousel.removeEventListener('wheel', (e) => handleWheel(e, artistsCarouselRef));
-      }
+      } 
     };
   }, []);
 
   return (
     <>
    
-      <div className=' -p-10 -m-12  pl-4  border-white bg-gradient-to-b from-[#ff012023] to-black via-black '>
+      <div className='  -m-12  pl-6   border-white bg-gradient-to-b from-[#ff012023] to-black via-black pr-6 mb-20'>
         
         <div className='m-13 p-10 '>
           <div className='flex items-center gap-2 mt-4 '> 
@@ -119,7 +119,7 @@ const DisplayHome = () => {
               className="flex overflow-x-auto scrollbar-hide space-x-4 p-2 scroll-smooth"
             >
               {songsData.map((item, index) => (
-                <SongItem key={index} name={item.name} desc={item.desc} id={item.id} image={item.image} />
+                <SongItem key={index} name={item.name} author={item.author} id={item.id} image={item.image} />
               ))}
             </div>
           </div>

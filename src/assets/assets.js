@@ -28,6 +28,8 @@ import spotify_logo_white from './logo_white.png'
 import browse_icon from './browse.png'
 import close_icon from './close.png'
 import device_icon from './device.png'
+import music_icon from './music.png'
+
 
 import clock_icon from './clock_icon.png'
 import notification_bell_icon from './notification_bell.png'
@@ -55,10 +57,15 @@ import gif1 from './gif1.gif'
 
 import img19 from './img19.jpg'
 import img20 from './img20.jpg'
-import img23 from './img23.jpeg'
+import img23 from './img23.jpg'
 import img24 from './img24.jpg'
 import img25 from './img25.jpg'
 import img26 from './img26.jpg'
+import img27 from './img27.jpeg'
+import img28 from './img28.jpeg'
+import img29 from './img29.jpeg'
+import img30 from './img30.jpeg'
+
 
 import song1 from  './song1.mp3'
 import song2 from  './song2.mp3'
@@ -67,6 +74,9 @@ import song4 from  './song4.mp3'
 import song5 from  './song5.mp3'
 import song6 from  './song6.mp3'
 import song7 from  './song7.mp3'
+import song8 from  './song8.mp3'
+
+
 import play_black_icon from './playBlack.png'
 import pause_black_icon from './pauseBlack.png'
 import ham_menu_icon from './ham_menu.png'
@@ -109,6 +119,7 @@ export const assets = {
     browse_icon,
     close_icon,
     device_icon,
+    music_icon,
     img1,
     img2,
     img3,
@@ -214,13 +225,13 @@ export const songsData = [
     },
     {
         id:2,
-        name: "Come As You Are",
-        image: img3,
+        name: "That's Life",
+        image: img30,
         file:song3,
         desc:"Put a smile on your face with these happy tunes",
         duration:"4:02",
-        author: "Nirvana",
-        id_artist: 0
+        author: "Frank Sinatra",
+        id_artist: 7
     },
     {
         id:3,
@@ -265,13 +276,13 @@ export const songsData = [
     },
     {
         id:7,
-        name: "Song Eight",
-        image: img12,
-        file:song2,
+        name: "Chega de Saudade",
+        image: img28,
+        file:song8,
         desc:"Put a smile on your face with these happy tunes",
         duration:"2:35",
-        author: "Artist",
-        id_artist: 0
+        author: "Antônio Carlos Jobim",
+        id_artist: 6
     },
         
 ]
@@ -301,7 +312,7 @@ export const artistData = [
         id:2,
         name: "Guns N' Roses",
         image: img1,
-        bgColor: "#cc1f29",
+        bgColor: "#ffffff89",
         desc:"Put a smile on your face with these happy tunes",
         banner: img23
     },
@@ -332,19 +343,19 @@ export const artistData = [
     },
     {
         id:6,
-        name: "Artist 3",
-        image: img7,
-        bgColor: "#eaba4b",
+        name: "Antônio Carlos Jobim",
+        image: img27,
+        bgColor: "#242424",
         desc:"Put a smile on your face with these happy tunes",
-        banner: img7
+        banner: img27
     },
     {
         id:7,
-        name: "Artist 4",
-        image: img12,
-        bgColor: "#eaba4b",
+        name: "Frank Sinatra",
+        image: img29,
+        bgColor: "#2184c7",
         desc:"Put a smile on your face with these happy tunes",
-        banner: img12
+        banner: img30
     },
         
 ]

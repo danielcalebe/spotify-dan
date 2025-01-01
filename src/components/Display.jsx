@@ -10,6 +10,9 @@ import { useSidebar } from '../context/SidebarRightContext';
 import SidebarRight from './SidebarRight';
 import { useSidebarLeft } from '../context/SidebarLeftContext';
 import DisplaySong from './DisplaySong';
+import DisplayBrowse from './DisplayBrowse';
+import DisplayLyrics from './DisplayLyrics';
+import DisplayProfile from './DisplayProfile';
 
 const Display = ({isSongPage}) => {
   const { isSidebarVisible } = useSidebar();
@@ -36,7 +39,7 @@ const Display = ({isSongPage}) => {
 
   useEffect(() => {
     if (isArtist) {
-      displayRef.current.style.background = `linear-gradient(${bgColorArtist}, #121212 85%), #121212`;
+      displayRef.current.style.background = `linear-gradient(${bgColorArtist}, #121212 70%), #121212`;
     } else {
       displayRef.current.style.background = `#121212`;
     }
@@ -48,7 +51,7 @@ const Display = ({isSongPage}) => {
 
     <div
       ref={displayRef}
-      className={`scrollbar-hidden  flex-grow  transition-all duration-300 overflow-x-hidden md:overflow-x-auto
+      className={`scrollbar-hidden mt-2  flex-grow  transition-all duration-300 overflow-x-hidden md:overflow-x-auto
         w-[100%]   rounded bg-[#121212] text-white  overflow-y-auto lg:w-[75%] lg:ml-0 
         ${isSidebarVisible ? 'md:mr-[100px] lg:mr-[24%] xl:mr-[23%]  pr-14' : 'w-[100%]'}
         ${isSidebarCollapsed ? '' : 'w-[100%]'} 
@@ -60,6 +63,9 @@ const Display = ({isSongPage}) => {
         <Route path='/album/:id' element={<DisplayAlbum />} />
         <Route path='/artist/:id' element={<DisplayArtist />} />
         <Route path='/song/:id' element={<DisplaySong />} />
+        <Route path='/browse' element={<DisplayBrowse  />} />
+        <Route path='/lyrics/:id' element={<DisplayLyrics />} />
+        <Route path='/profile' element={<DisplayProfile />} />
 
       </Routes>
     

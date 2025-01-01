@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { PlayerContext } from '../context/PlayerContext';
 import { assets } from '../assets/assets'; 
+import { useNavigate } from 'react-router-dom';
 
-const SongItem = ({ name, image, desc, id }) => {
+const SongItem = ({ name, image, author, id }) => {
   const { playWithId, track, playStatus } = useContext(PlayerContext); 
   const isPlayingCurrentSong = track.id === id; 
-
+  const navigate = useNavigate();
   const handlePlayPause = (e) => {
     e.stopPropagation(); 
     playWithId(id); 
@@ -33,7 +34,7 @@ const SongItem = ({ name, image, desc, id }) => {
       </div>
       {/* Informações da música */}
       <p className="font-bold mt-2 mb-1">{name}</p>
-      <p className="text-slate-200 text-sm">{desc}</p>
+      <p  className="hover:text-white hover:underline text-slate-200 text-sm">{author}</p>
     </div>
   );
 };

@@ -68,7 +68,7 @@ const Player = ({ setActiveContent, activeContent,closeSidebar, isSongPage }) =>
                 <img className='w-12' src={track.image} alt="" />
                 <div>
                     <p>{track.name}</p>
-                    <p className='hover:underline cursor-pointer'   >{track.author.slice(0, 12)}</p>
+                    <p onClick={() => navigate(`/artist/${track.id_artist}`)} className='hover:underline cursor-pointer'   >{track.author}</p>
                 </div>
             </div>
 
@@ -104,23 +104,23 @@ const Player = ({ setActiveContent, activeContent,closeSidebar, isSongPage }) =>
 
 
             <div className='hidden lg:flex items-center gap-2 opacity-75 '>
-                <img className={`w-4 ${activeContent == "playingNow" ? '' : 'img-white'}`} src={assets.plays_icon} alt=""
+                <img className={`w-4 cursor-pointer scale-hover  ${activeContent == "playingNow" ? '' : 'img-white'}`} src={assets.plays_icon} alt=""
                     onClick={() => handleContentToggle ("playingNow")}
                                  />
                 
-                <img className='w-4 img-white' src={assets.mic_icon} alt="" />
-                <img className={`w-4 ${activeContent == "queue" ? '' : 'img-white'}`}   src={assets.queue_icon} alt="" 
+                <img className='w-4 img-white cursor-pointer scale-hover' src={assets.mic_icon} alt="" onClick={() => navigate(`/lyrics/${track.id}`)} />
+                <img className={`w-4 cursor-pointer scale-hover cursor-pointer scale-hover ${activeContent == "queue" ? '' : 'img-white'}`}   src={assets.queue_icon} alt="" 
                  
                  onClick={() => handleContentToggle ("queue")}
 
                 />
 
                 
-                <img className={`w-4 ${activeContent == "newDevice" ? '' : 'img-white'}`} src={assets.speaker_icon} alt="" 
+                <img className={`w-4 cursor-pointer scale-hover ${activeContent == "newDevice" ? '' : 'img-white'}`} src={assets.speaker_icon} alt="" 
                  onClick={() => handleContentToggle ("newDevice")}
 
                 />
-                <img className='w-4' src={assets.volume_icon} alt="" />
+                <img className='w-4 ' src={assets.volume_icon} alt="" />
                 <input
                     type="range"
                     min="0"
@@ -138,8 +138,8 @@ const Player = ({ setActiveContent, activeContent,closeSidebar, isSongPage }) =>
 
 
 
-                <img className='w-4' src={assets.mini_player_icon} alt="" />
-                <img className='w-4' src={assets.zoom_icon}  onClick={() => {
+                <img className='w-4 cursor-pointer scale-hover' src={assets.mini_player_icon} alt="" />
+                <img className='w-4 cursor-pointer scale-hover brightness-hover' src={assets.zoom_icon}  onClick={() => {
     navigate(`/song/${track.id}`); // Navega para a página da música
     handleFullscreen();
     activeContent ? closeSidebar() : '';

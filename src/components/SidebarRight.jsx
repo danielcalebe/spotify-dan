@@ -81,7 +81,7 @@ function SidebarRight({ activeContent, closeSidebar, isSongPage }) {
               {artist ? (
                 <>
                   <img
-                    className="rounded-t-lg left-0 top-0 absolute max-w-full"
+                    className="opacity-60 rounded-t-lg left-0 top-0 absolute max-w-full"
                     src={artist.banner || assets.arrow_icon}
                     alt="Artist Banner"
                   />

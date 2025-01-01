@@ -1,7 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@font-face {
+  font-family: "Spotify";
+  src: url(SpotifyMix-Regular.ttf);
+}
+html{
+  font-family: Spotify;
+}
 .scrollbar-hide::-webkit-scrollbar {
     display: none; /* Oculta a barra de rolagem no Webkit */
   }
@@ -17,7 +23,12 @@
 .parallax {
   position: relative;
 }
-
+.word-spacing-wide {
+  word-spacing: 0.4rem;
+}
+.word-spacing-wider {
+  word-spacing: 1rem;
+}
 .parallax .bg-cover {
   position: absolute;
   top: 0;

@@ -24,7 +24,6 @@ const DisplayArtist = () => {
     const albumsCarouselRef = useRef(null);
     const artistsCarouselRef = useRef(null);
 
-    const mainContentRef = useRef(null);
 
     const handleWheel = (e, carouselRef) => {
         if (carouselRef.current) {
@@ -58,13 +57,14 @@ const DisplayArtist = () => {
     }, []);
 
     useEffect(() => {
-        if (mainContentRef.current) {
-            mainContentRef.current.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start', // Garante que o topo do elemento seja alinhado com o topo da janela
-            });
-        }
-    }, [id]); // Só executa quando o 'id' do artista mudar
+        // Rola a página para o topo (x = 0, y = 0)
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth', // Rolagem suave
+        });
+    }, [id]); // Executa apenas quando o 'id' muda
+    
 
 
 
@@ -73,13 +73,14 @@ const DisplayArtist = () => {
         handleTabClick("bg-white text-black", "bg-[#242424] text-white", ".tab");
     }, []);
 
+    const filteredSongs = songsData.filter((item) => String(item.id_artist) === id);
 
     return (
         <>
 
 
 
-            <div className="-mr-[16%]  -my-5 pb-2 flex justify-content items-center  bg-center" ref={mainContentRef}>
+            <div className="-mr-[2000x] z-10  -my-5 pb-2 flex justify-content items-center  bg-center" >
                 <div className="w-full h-[400px] bg-white relative  " style={{
                     backgroundImage: `url(${artist.banner})`,
                     backgroundColor: 'rgba(0, 0, 0, 0.6)', // Adiciona a sobreposição de cor
@@ -111,73 +112,98 @@ const DisplayArtist = () => {
 
             {/* Resto do conteúdo da página, como as seções de álbuns, músicas populares, etc. */}
             <div>
+                 <div className="flex items-center  pt-6 gap-1 w-[100%] p-4 rounded-lg pl-5 ">
+                        <div 
+                         onClick={() => playWithId(0)} // Toca ou pausa a música
+                         key={0} className="flex items-center justify-center w-[50px] h-[50px] bg-[#1db954] rounded-full transition-transform duration-300 hover:scale-110 ">
+                          <img
+                          
+                            className="w-[40%] cursor-pointer"
+                            src={playStatus ? assets.pause_black_icon : assets.play_black_icon}
+                            alt=""
+                          />
+                        </div>
+                
+                        <div className="flex items-center justify-center w-[60px] h-auto transition-transform duration-300 hover:scale-110">
+                          <img
+                            className="w-[100%] cursor-pointer"
+                            src={assets.shuffle_gray_icon}
+                            alt=""
+                          />
+                        </div>
+                
+                
+                        <div className=" items-center p-1 px-3 font-semibold cursor-pointer
+                         text-xs mt-[0.7%] mr-2  rounded-full border border-white justify-center  transition-transform duration-300 hover:scale-110 ">
+                            <p>Follow</p>
+                        </div>
+                
+                       
+                
+                        <div className="flex items-center justify-center  ">
+                          <h1 className="text-gray-400 text-xl cursor-pointer font-black text-center hover:text-white">
+                            . . .
+                          </h1>
+                        </div>
+                      </div>
+
                 <h1 className="my-5 font-bold text-2xl ml-2">Popular</h1>
 
-                {songsData.slice(0, 5).map((item, index) => {
-                    const isPlayingCurrentSong = track.id === item.id; // Verifica se a música atual é esta
-                    return (
-                        <div key={index} onClick={() => playWithId(item.id)} className="group w-full h-12
-                         rounded flex items-center hover:bg-[#ffffff2b] gap-4 ">
-                            {/* Contêiner principal para cada item */}
-                            <div className="flex items-center ml-3 gap-4 w-full">
+                <div>
+      {filteredSongs.length > 0 ? (
+        filteredSongs.map((item, index) => {
+          const isPlayingCurrentSong = track.id === item.id;
 
-                                {/* Imagem da música */}
-                                <div className="relative w-[30px] min-w-[30px] h-auto">
-                                    <img
-                                        onClick={(e) => {
-                                            e.stopPropagation(); // Evita que o clique no botão dispare o onClick do contêiner
-                                            playWithId(item.id); // Toca ou pausa a música com base no id
-                                        }}
-                                        className="group-hover:block hidden w-[15px] absolute -top-2 left-0"
-                                        src={isPlayingCurrentSong && playStatus ? assets.pause_icon : assets.play_icon}
-                                        alt=""
-                                    />
-                                    <p className="group-hover:hidden text-[#6b6a6a] font-semibold">{index + 1}</p>
-                                </div>
+          return (
+            <div key={index} onClick={() => playWithId(item.id)} className="group w-full h-12 rounded flex items-center hover:bg-[#ffffff2b] gap-4">
+              <div className="flex items-center ml-3 gap-4 w-full">
+                {/* Imagem da música */}
+                <div className="relative w-[30px] min-w-[30px] h-auto">
+                  <img
+                    onClick={(e) => {
+                      e.stopPropagation();  
+                      playWithId(item.id); 
+                    }}
+                    className="group-hover:block hidden w-[15px] absolute -top-2 left-0"
+                    src={isPlayingCurrentSong && playStatus ? assets.pause_icon : assets.play_icon}
+                    alt=""
+                  />
+                  <p className="group-hover:hidden text-[#6b6a6a] font-semibold">{index + 1}</p>
+                </div>
 
-                                {/* Imagem da música (redimensionada e ajustada) */}
-                                <div className="min-w-8 max-w-8 h-auto">
-                                    <img className="w-full h-auto" src={item.image || assets.img14} alt="" />
-                                </div>
+                <div className="min-w-8 max-w-8 h-auto">
+                  <img className="w-full h-auto" src={item.image || assets.img14} alt="" />
+                </div>
 
-                                {/* Nome da música */}
-                                <div className="flex justify-between gap-2 text-left px-2">
-                                
+                <div className="flex justify-between gap-2 text-left px-2">
+                  <p className="text-white font-semibold text-sm truncate">{item.name}</p>
+                </div>
 
-                                    <p className="text-white font-semibold text-xs truncate">{item.name}</p>
+                <div className="flex flex-row text-[#6b6a6a] justify-between w-full">
+                  <div className="text-center flex-grow mt-1">
+                    <p className="font-semibold group-hover:text-white"></p>
+                  </div>
 
-                                    
+                  <div className="mt-1.5     cursor-pointer hidden lg:group-hover:block sm:hidden">
+                    <img className="w-6" src={assets.save_library_icon} alt="" />
+                  </div>
 
-                                </div>
+                  <div className="text-center mt-1 w-20 sm:mr-20">
+                    <p className="font-semibold">{item.duration}</p>
+                  </div>
 
-
-                                {/* Informações adicionais */}
-                                <div className="flex flex-row  text-[#6b6a6a] justify-between w-full">
-                                    <div className="text-center flex-grow mt-1">
-                                        <p className="font-semibold group-hover:text-white"></p>
-                                    </div>
-
-                                     {/* Ícone de salvar */}
-                                     <div className="mt-1 cursor-pointer hidden lg:group-hover:block  sm:hidden">
-                                        <img className="w-8" src={assets.save_library_icon} alt="" />
-                                    </div>
-                                    {/* Duração com um tamanho fixo e ajustado para se alinhar corretamente */}
-                                    <div className="text-center mt-1 w-20 sm:mr-20 ">
-                                        <p className="font-semibold">{item.duration}</p>
-                                    </div>
-                                   
-
-
-
-                                    {/* Ícone de opções (3 pontos) */}
-                                    <div className="text-center mb-2 mr-2 cursor-pointer hidden sm:block">
-                                        <p className="font-bold">. . .</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    );
-                })}
+                  <div className="text-center mb-2 mr-2 cursor-pointer hidden sm:block">
+                    <p className="font-bold">. . .</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })
+      ) : (
+        <p>Não há músicas disponíveis para este artista.</p>
+      )}
+    </div>
 
                 <p className="mt-6 ml-3 cursor-pointer font-bold text-[#6b6a6a] hover:text-white text-xs">Show more</p>
             </div>

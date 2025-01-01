@@ -7,11 +7,11 @@ import { PlayerContext } from '../context/PlayerContext';
 const DisplayAlbum = () => {
   const { id } = useParams();  
   const albumData = albumsData[id];
-  const { playWithId, track } = useContext(PlayerContext);
+  const { playWithId, track, playStatus } = useContext(PlayerContext);
 
   return (
     <>
-      <div className="mt-10 flex gap-8 flex-col md:flex-row md:items-end  backdrop-blur-full">
+      <div className="mt-10 flex gap-8 flex-col md:flex-row md:items-end  backdrop-blur-full  p-4 pl-5">
         <img className="w-48 rounded" src={albumData.image} alt="" />
         <div className="flex flex-col">
           <p>Playlist</p>
@@ -23,14 +23,14 @@ const DisplayAlbum = () => {
           </p>
         </div>
       </div>
-      <div className="flex items-center  mt-[70px] gap-1 w-[100%] p-4 rounded-lg ">
+      <div className="flex items-center  mt-[70px] gap-1 w-[100%] p-4 rounded-lg pl-5 ">
         <div 
          onClick={() => playWithId(0)} // Toca ou pausa a música
          key={0} className="flex items-center justify-center w-[50px] h-[50px] bg-[#1db954] rounded-full transition-transform duration-300 hover:scale-110 ">
           <img
           
             className="w-[40%] cursor-pointer"
-            src={assets.play_black_icon}
+            src={playStatus ? assets.pause_black_icon : assets.play_black_icon}
             alt=""
           />
         </div>
@@ -44,7 +44,7 @@ const DisplayAlbum = () => {
         </div>
 
 
-        <div className="flex items-center justify-center w-[50px] h-[50px] mt-[0.7%] transition-transform duration-300 hover:scale-110 ">
+        <div className="flex items-center justify-center w-8 mt-[0.7%] transition-transform duration-300 hover:scale-110 ">
           <img
             className="w-[100%] cursor-pointer"
             src={assets.save_library_icon}
@@ -52,7 +52,7 @@ const DisplayAlbum = () => {
           />
         </div>
 
-        <div className="flex items-center justify-center w-[50px]  h-[50px] mt-[0.6%]  transition-transform duration-300 hover:scale-110">
+        <div className="flex items-center justify-center w-12 mt-[0.6%]  transition-transform duration-300 hover:scale-110">
           <img
             className="w-[100%] cursor-pointer"
             src={assets.download_icon}
@@ -60,7 +60,7 @@ const DisplayAlbum = () => {
           />
         </div>
 
-        <div className="flex items-center justify-center w-[50px] h-[50px] ">
+        <div className="flex items-center justify-center  ">
           <h1 className="text-gray-400 text-xl cursor-pointer font-black text-center hover:text-white">
             . . .
           </h1>
@@ -71,11 +71,11 @@ const DisplayAlbum = () => {
 
 
 
-      <div className="grid grid-cols-3 sm:grid-cols-4 mt-10 mb-4 pl-2 text-[#a7a7a7]">
+      <div className=" grid grid-cols-3 sm:grid-cols-4 mt-10 mb-4 pl-5 text-[#a7a7a7]">
         <p>
           <b className="mr-4 ">#</b> Title
         </p>
-        <p>Album</p>
+        <p className='lg:pl-0 pl-20'>Album</p>
         <p className="hidden sm:block">Date Added</p>
         <img className="m-auto w-4" src={assets.clock_icon} alt="" />
       </div>
@@ -89,14 +89,15 @@ const DisplayAlbum = () => {
           <div
             onClick={() => playWithId(item.id)} // Toca ou pausa a música
             key={index}
-            className="grid grid-cols-3 sm:grid-cols-4 p-2 items-center text-[#a7a7a7] hover:bg-[#ffffff2b] cursor-pointer relative group"
+            className="grid grid-cols-3 sm:grid-cols-4 p-2 justify-between items-center text-[#a7a7a7] hover:bg-[#ffffff2b] cursor-pointer relative 
+            group pl-5"
           >
-            <p className="text-white">
+            <p className="text-white truncate">
               <b className="mr-4 text-[#a7a7a7]">{index + 1}</b>
               <img className="inline w-10 mr-5" src={item.image} alt="" />
               {item.name}
             </p>
-            <p className="text-[15px]">{albumData.name}</p>
+            <p className="text-[15px] truncate lg:pl-0 pl-20">{albumData.name}</p>
             <p className="text-[15px] hidden sm:block">1 day ago</p>
             <p className="text-[15px] text-center">{item.duration}</p>
 
@@ -109,7 +110,7 @@ const DisplayAlbum = () => {
               className="absolute bottom-2 right-2 w-10 h-10 bg-[#1db954] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             >
               <img
-                src={isPlayingCurrentSong ? assets.pause_black_icon : assets.play_black_icon}
+                src={isPlayingCurrentSong && playStatus? assets.pause_black_icon : assets.play_black_icon}
                 alt={isPlayingCurrentSong ? 'Pause' : 'Play'}
                 className="w-4"
               />

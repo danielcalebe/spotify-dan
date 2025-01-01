@@ -46,13 +46,14 @@ const Navbar = () => {
             inputValue ? 'invisible' : ''
           }`}
         >
-          What you want to hear?
+          What you want to play?
         </p>
       </div>
     </div>
     <div className="flex">
       <hr className="hidden sm:block w-[1.5px] h-8 bg-[#b0b0b0]" />
       <img
+      onClick={() => navigate('/browse')}
         className="min-w-10 max-w-10 cursor-pointer scale-hover"
         src={assets.browse_icon}
         alt=""
@@ -69,7 +70,7 @@ const Navbar = () => {
           <div className='scale-hover cursor-pointer w-12 flex items-center justify-center mt-1  scale-hover brightness-hover '>
             <img src={assets.notification_bell_icon} alt="" />
           </div>
-          <p className='cursor-pointer bg-purple-500 text-black w-7 h-7 rounded-full flex items-center justify-center p-2 mr-2 '>DC</p>
+          <p onClick={() => navigate(`/profile`)} className='cursor-pointer bg-purple-500 text-black w-7 h-7 rounded-full flex items-center justify-center p-2 mr-2 '>DC</p>
         </div>
 
       </div>
