@@ -6,8 +6,9 @@ import { useSidebar } from '../context/SidebarRightContext';
 import { useNavigate } from 'react-router-dom';
 
 
-const Player = ({ setActiveContent, activeContent,closeSidebar, isSongPage }) => {
+const Player = ({ setActiveContent, activeContent, closeSidebar, isSongPage }) => {
     const { toggleSidebar } = useSidebar();
+    const isLyrics = location.pathname.includes("lyrics");
 
     const { audioRef, seekBar, seekBg, playStatus, play, pause, track, time, previous, next, seekSong } = useContext(PlayerContext);
 
@@ -49,20 +50,20 @@ const Player = ({ setActiveContent, activeContent,closeSidebar, isSongPage }) =>
     const handleFullscreen = () => {
         const element = document.documentElement; // Elemento que será colocado em tela cheia (a página inteira)
         if (element.requestFullscreen) {
-          element.requestFullscreen();
+            element.requestFullscreen();
         } else if (element.mozRequestFullScreen) {
-          element.mozRequestFullScreen(); // Para Firefox
+            element.mozRequestFullScreen(); // Para Firefox
         } else if (element.webkitRequestFullscreen) {
-          element.webkitRequestFullscreen(); // Para Safari e Chrome
+            element.webkitRequestFullscreen(); // Para Safari e Chrome
         } else if (element.msRequestFullscreen) {
-          element.msRequestFullscreen(); // Para IE/Edge
+            element.msRequestFullscreen(); // Para IE/Edge
         }
-      };
-     
- 
+    };
+
+
     return (
 
-        <div className='w-[100%]  h-[10%] bg-black flex justify-between items-center text-white px-4 bottom-0 fixed'
+        <div className='w-[100%]  h-[10%] bg-black flex justify-between items-center    text-white px-4 bottom-0 fixed'
         >
             <div className='hidden lg:flex items-center gap-4'>
                 <img className='w-12' src={track.image} alt="" />
@@ -105,19 +106,20 @@ const Player = ({ setActiveContent, activeContent,closeSidebar, isSongPage }) =>
 
             <div className='hidden lg:flex items-center gap-2 opacity-75 '>
                 <img className={`w-4 cursor-pointer scale-hover  ${activeContent == "playingNow" ? '' : 'img-white'}`} src={assets.plays_icon} alt=""
-                    onClick={() => handleContentToggle ("playingNow")}
-                                 />
-                
-                <img className='w-4 img-white cursor-pointer scale-hover' src={assets.mic_icon} alt="" onClick={() => navigate(`/lyrics/${track.id}`)} />
-                <img className={`w-4 cursor-pointer scale-hover cursor-pointer scale-hover ${activeContent == "queue" ? '' : 'img-white'}`}   src={assets.queue_icon} alt="" 
-                 
-                 onClick={() => handleContentToggle ("queue")}
+                    onClick={() => handleContentToggle("playingNow")}
+                />
+
+                <img className={`w-4  cursor-pointer scale-hover ${isLyrics ? '' : 'img-white'}`} src={assets.mic_icon}
+                    alt="" onClick={() => navigate(`/lyrics/${track.id}`)} />
+                <img className={`w-4 cursor-pointer scale-hover cursor-pointer scale-hover ${activeContent == "queue" ? '' : 'img-white'}`} src={assets.queue_icon} alt=""
+
+                    onClick={() => handleContentToggle("queue")}
 
                 />
 
-                
-                <img className={`w-4 cursor-pointer scale-hover ${activeContent == "newDevice" ? '' : 'img-white'}`} src={assets.speaker_icon} alt="" 
-                 onClick={() => handleContentToggle ("newDevice")}
+
+                <img className={`w-4 cursor-pointer scale-hover ${activeContent == "newDevice" ? '' : 'img-white'}`} src={assets.speaker_icon} alt=""
+                    onClick={() => handleContentToggle("newDevice")}
 
                 />
                 <img className='w-4 ' src={assets.volume_icon} alt="" />
@@ -139,13 +141,16 @@ const Player = ({ setActiveContent, activeContent,closeSidebar, isSongPage }) =>
 
 
                 <img className='w-4 cursor-pointer scale-hover' src={assets.mini_player_icon} alt="" />
-                <img className='w-4 cursor-pointer scale-hover brightness-hover' src={assets.zoom_icon}  onClick={() => {
-    navigate(`/song/${track.id}`); // Navega para a página da música
-    handleFullscreen();
-    activeContent ? closeSidebar() : '';
-  }} alt="" />
+                <img className='w-4 cursor-pointer scale-hover brightness-hover' src={assets.zoom_icon} onClick={() => {
+                    navigate(`/song/${track.id}`); // Navega para a página da música
+                    handleFullscreen();
+                    activeContent ? closeSidebar() : '';
+                }} alt="" />
             </div>
+
+       
         </div>
+
     );
 };
 

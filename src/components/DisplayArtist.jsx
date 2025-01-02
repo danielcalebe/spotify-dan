@@ -248,7 +248,7 @@ const DisplayArtist = () => {
                     {/* Carrossel de álbuns */}
                     <div className="mb-4">
                         <div ref={albumsCarouselRef} className="flex overflow-x-auto scrollbar-hide space-x-4 p-2 scroll-smooth">
-                            {albumsData.reverse().map((item, index) => (
+                            {albumsData.map((item, index) => (
                                 <AlbumItem id={item.id} key={index} name={item.name} desc={item.desc} image={item.image} />
                             ))}
                         </div>
@@ -256,7 +256,7 @@ const DisplayArtist = () => {
                 </div>
 
                 {/* Carrossel de outros artistas */}
-                <div className="mb-8" >
+                <div className="mb-[200px]" >
                     <h2 className="my-5 font-bold text-xl ml-2">Related Artists</h2>
                     <div ref={artistsCarouselRef} className="flex overflow-x-auto scrollbar-hide space-x-4 p-2">
 

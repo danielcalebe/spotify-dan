@@ -119,8 +119,10 @@ const DisplayAlbum = () => {
         );
       })}
 
+     
 
-      <div className="mb-[100px]"></div>
+
+      <div className="mb-[200px]"></div>
     </>
   );
 };

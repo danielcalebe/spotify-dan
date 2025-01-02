@@ -157,7 +157,7 @@ const DisplaySong = () => {
           </div>
 
           <div className="hidden flex-wrap items-center gap-4 opacity-75 mt-2 md:flex overflow-x-auto">
-            <img className="w-5 img-white brightness-75 cursor pointer  " src={assets.mic_icon} alt="Mic" />
+            <img   onClick={() => navigate(`/lyrics/${track.id}`)} className="w-5 img-white brightness-75 cursor pointer  " src={assets.mic_icon} alt="Mic" />
             <img className="w-4" src={assets.volume_icon} alt="Volume" />
             <input
               type="range"

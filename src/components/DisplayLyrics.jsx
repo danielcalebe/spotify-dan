@@ -6,7 +6,7 @@ const DisplayLyrics = () => {
     const {id} = useParams();
     const songData = songsData[id];
     const artist = artistData[songData.id_artist];
-
+    
   return (
     <div className='w-full h-full flex p-2 pt-4 justify-center mb-[100px]' style={{
         backgroundColor: artist?.bgColor || '#ffffff'

@@ -51,7 +51,7 @@ const Display = ({isSongPage}) => {
 
     <div
       ref={displayRef}
-      className={`scrollbar-hidden mt-2  flex-grow  transition-all duration-300 overflow-x-hidden md:overflow-x-auto
+      className={`scrollbar-hidden mt-2   flex-grow  transition-all duration-300 overflow-x-hidden md:overflow-x-auto
         w-[100%]   rounded bg-[#121212] text-white  overflow-y-auto lg:w-[75%] lg:ml-0 
         ${isSidebarVisible ? 'md:mr-[100px] lg:mr-[24%] xl:mr-[23%]  pr-14' : 'w-[100%]'}
         ${isSidebarCollapsed ? '' : 'w-[100%]'} 
